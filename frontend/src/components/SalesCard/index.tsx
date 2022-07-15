@@ -2,9 +2,19 @@ import DataPicker from "react-datepicker";
 import NotificationButton from "../NotificationButton";
 import "./styles.css";
 import "react-datepicker/dist/react-datepicker.css";
+import { registerLocale, setDefaultLocale } from  "react-datepicker";
+import br from 'date-fns/locale/pt-BR';
+import { useState } from "react";
+registerLocale('br', br);
 
 function SalesCard() {
-  
+
+    const min = new Date(new Date().setDate(new Date().getDate()-365));
+    const max = new Date();
+
+    //Nome da constante e função que muda seu valor 
+    const [minDate, setMinDate] = useState(min);
+    const [maxDate, setMaxDate] = useState(max);
     return (
         <>
             <div className="dsmeta-card">
@@ -12,16 +22,18 @@ function SalesCard() {
                 <div>
                 <div className="dsmeta-form-control-container">
                     <DataPicker
-                        selected={new Date()}
-                        onChange={(date: Date) => {}}
+                        locale="br"
+                        selected={minDate}
+                        onChange={(date: Date) => setMinDate(date)}
                         className="dsmeta-form-control"
                         dateFormat="dd/MM/yyyy"
                     />
                 </div>
                 <div className="dsmeta-form-control-container">
                     <DataPicker
-                        selected={new Date()}
-                        onChange={(date: Date) => {}}
+                        locale="br"
+                        selected={maxDate}
+                        onChange={(date: Date) => setMaxDate(date)}
                         className="dsmeta-form-control"
                         dateFormat="dd/MM/yyyy"
                     />
