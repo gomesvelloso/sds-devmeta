@@ -6,6 +6,7 @@ import { registerLocale, setDefaultLocale } from  "react-datepicker";
 import br from 'date-fns/locale/pt-BR';
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { BASE_URL } from "../../util/request";
 registerLocale('br', br);
 
 function SalesCard() {
@@ -19,7 +20,7 @@ function SalesCard() {
 
     //função e uma lista de argumentos;
     useEffect(() => {
-    axios.get("http://localhost:8080/sales")
+    axios.get(`${BASE_URL}/sales`)
         .then(response => {
             console.log(response.data);
         });
