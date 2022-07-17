@@ -4,7 +4,8 @@ import "./styles.css";
 import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale, setDefaultLocale } from  "react-datepicker";
 import br from 'date-fns/locale/pt-BR';
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 registerLocale('br', br);
 
 function SalesCard() {
@@ -15,6 +16,15 @@ function SalesCard() {
     //Nome da constante e função que muda seu valor 
     const [minDate, setMinDate] = useState(min);
     const [maxDate, setMaxDate] = useState(max);
+
+    //função e uma lista de argumentos;
+    useEffect(() => {
+    axios.get("http://localhost:8080/sales")
+        .then(response => {
+            console.log(response.data);
+        });
+    }, [])
+
     return (
         <>
             <div className="dsmeta-card">
